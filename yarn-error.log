@@ -1,0 +1,50 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js install
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-10-oracle/bin:/usr/lib/jvm/java-10-oracle/db/bin
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  8.10.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/eslint: ETIMEDOUT
+      at Timeout._onTimeout (/usr/share/yarn/lib/cli.js:138128:19)
+      at ontimeout (timers.js:482:11)
+      at tryOnTimeout (timers.js:317:5)
+      at Timer.listOnTimeout (timers.js:277:5)
+
+npm manifest: 
+  {
+    "name": "MyAPP",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+    },
+    "devDependencies": {
+      "eslint": "^5.6.0",
+      "eslint-config-airbnb": "^17.1.0",
+      "eslint-config-react-app": "^2.1.0",
+      "eslint-loader": "^2.1.0",
+      "eslint-plugin-flowtype": "^2.50.0",
+      "eslint-plugin-import": "^2.14.0",
+      "eslint-plugin-jsx": "^0.0.2",
+      "eslint-plugin-jsx-a11y": "^6.1.1",
+      "eslint-plugin-react": "^7.11.1"
+    },
+    "scripts": {
+      "eslint": "npx eslint -- ./src/."
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
