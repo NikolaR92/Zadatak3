@@ -1,21 +1,34 @@
-const Point = require('./Point.js');
 const bfs = require('./bfs.js');
+const createGrid = require('./grid.js');
+const config = require('./config.js');
+const createRandomBlocks = require('./createRandomBlocks.js');
 
-let p1 = new Point(1,2);
-let p2 = new Point(3,4);
-let p3 = new Point(1,3);
-let p4 = new Point(1,1);
-let p5 = new Point(2,2);
+function main() {
+	try {
+		const grid = createGrid(10, 10);
+		// checking if valid data is in config file
+		if (!(Number.isInteger((config.startCoordinate)[0]) && Number.isInteger((config.startCoordinate)[1])
+        && Number.isInteger((config.endCoordinate)[0]) && Number.isInteger((config.endCoordinate)[1])
+        && Number.isInteger(config.blocks))) {
+			throw new TypeError('Initial data inside a config file must be Integer type');
+		}
+		if ((config.startCoordinate)[0] < 0 && (config.startCoordinate)[1] < 0
+        && (config.startCoordinate)[0] > 9 && (config.startCoordinate)[1] > 9) {
+			throw new TypeError('Invalide start coordinate');
+		}
 
-p1.addNeighbour(p2);
-p1.addNeighbour(p4);
-p2.addNeighbour(p1);
-p2.addNeighbour(p3);
-p2.addNeighbour(p5);
-p3.addNeighbour(p2);
-p3.addNeighbour(p4);
-p3.addNeighbour(p5);
-p4.addNeighbour(p5);
-p5.addNeighbour(p2);
+		if ((config.endCoordinate)[0] < 0 && (config.endCoordinate)[1] < 0
+        && (config.endCoordinate)[0] > 9 && (config.endCoordinate)[1] > 9) {
+			throw new TypeError('Invalide end coordinate');
+		}
 
-console.log(bfs(p1,p5));
+
+		createRandomBlocks(config.startCoordinate, config.endCoordinate, grid, config.blocks);
+		const array = bfs(config.startCoordinate, config.endCoordinate, grid);
+		return array;
+	} catch (error) {
+		return `${error}`;
+	}
+}
+
+console.log(main());
