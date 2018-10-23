@@ -1,9 +1,15 @@
+/**
+ * Module for creating grid
+ * @module src/grid
+ */
+
 const Point = require('./Point.js');
 
-// Function generates grid, where each cell in matrix is a point
-// arguments: row - int number of row in a matrix
-//            coloms -int number of coloms in a matrix
-// return: array of Points - array with each point of matrix cell saved
+/** Function generates grid, where each cell in matrix is a point
+ * @param {Integer} row - Number of row in a matrix
+ * @param {Integer} coloms - Number of coloms in a matrix
+ * @return {Array.<Point>} Array with each point of matrix cell saved
+ */
 function createGrid(row, coloms) {
 	if (!(Number.isInteger(row)) && !(Number.isInteger(coloms))) {
 		throw new TypeError('Function createGrid: arguments must be of Integer type');

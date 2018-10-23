@@ -33,9 +33,7 @@
     ],
     "import/no-extraneous-dependencies": 0,
     "class-methods-use-this": 0,
-    "no-console": "off",
-    "no-underscore-dangle": [2, { "allowAfterThis": true }],
-    "prefer-destructuring": ["error", {"object": true, "array": false}]
+    "no-console": "off"
   },
   "env": {
     "node": true,

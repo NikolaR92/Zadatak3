@@ -5,8 +5,8 @@ const createRandomBlocks = require('./createRandomBlocks.js');
 
 function main() {
 	try {
-		const grid = createGrid(10, 10);
-		// checking if valid data is in config file
+		const grid = createGrid(config.heightOfGrid, config.widthOfGrid);
+		/** checking if valid data is in config file */
 		if (!(Number.isInteger((config.startCoordinate)[0]) && Number.isInteger((config.startCoordinate)[1])
         && Number.isInteger((config.endCoordinate)[0]) && Number.isInteger((config.endCoordinate)[1])
         && Number.isInteger(config.blocks))) {
@@ -23,8 +23,8 @@ function main() {
 		}
 
 
-		createRandomBlocks(config.startCoordinate, config.endCoordinate, grid, config.blocks);
-		const array = bfs(config.startCoordinate, config.endCoordinate, grid);
+		createRandomBlocks(config.startCoordinate, config.endCoordinate, grid, config.widthOfGrid, config.heightOfGrid, config.blocks);
+		const array = bfs(config.startCoordinate, config.endCoordinate, grid, config.widthOfGrid, config.heightOfGrid);
 		return array;
 	} catch (error) {
 		return `${error}`;
