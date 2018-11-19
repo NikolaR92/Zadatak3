@@ -3,14 +3,14 @@
  * @module src/createRandomBlocks
  */
 
-const bfs = require('./bfs.js');
+const bfs = require('./breadthFirstSearch.js');
 
 
-/**  Function shuffels a array of points using Fisher–Yates shuffle algorithm
+/**  Function shuffles a array of points using Fisher–Yates shuffle algorithm
  * @param {Array.<Point>} grid - Array of object points
  * @returns {Array.<Point>} Array of randomly shuffled Points
  */
-function shuffelGrid(grid) {
+function shuffleGrid(grid) {
 	const randomGrid = grid.slice();
 
 	/** Fisher-Yates algorithm */
@@ -35,20 +35,20 @@ function getRandomBlock(randomGrid) {
 }
 
 /** Function creates a grid with random wall blocks placed on interval.
- * @param {Array.<Integer>} start - Array with start coordinate on a grid
- * @param {Array.<Integer>} end - Array with end coordinate on a grid
+ * @param {Array.<number>} start - Array with start coordinate on a grid
+ * @param {Array.<number>} end - Array with end coordinate on a grid
  * @param {Array.<Point>} grid - Matrix where are we going to place blocks
- * @param {Integer} widthOfGrid - Number of coloms
- * @param {Integer} heightOfGrid - Number or rows
- * @param {Integer} numOfBlocks - Number of random wall blocks we want to crate
+ * @param {number} widthOfGrid - Number of colons
+ * @param {number} heightOfGrid - Number or rows
+ * @param {number} numOfBlocks - Number of random wall blocks we want to crate
  */
 function createRandomBlocks(start, end, grid, widthOfGrid, heightOfGrid, numOfBlocks) {
 	let blocksCounted = 0;
-	let randomGrid = shuffelGrid(grid);
+	let randomGrid = shuffleGrid(grid);
 	/** we calculate distance between start and end point
 	 * if number of blocks to create is higher then 100 - distance then rut
 	 * between start and end can not be created with this number of blocks
-	 * beacuase that is a minimal available space we require
+	 * because that is a minimal available space we require
 	 */
 	const distance = Math.abs(start[0] - end[0]) + Math.abs(start[1] - end[1]) + 1;
 	const range = widthOfGrid * heightOfGrid - distance;
@@ -60,7 +60,7 @@ function createRandomBlocks(start, end, grid, widthOfGrid, heightOfGrid, numOfBl
 	 * if true, we increment the counter and set wall to true
 	 * if we encounter a wall before we created all the walls,
 	 * then there is not a way to create all walls with this random grid
-	 * and we must start from begining
+	 * and we must start from beginning
 	 */
 	while (blocksCounted < numOfBlocks) {
 		const block = getRandomBlock(randomGrid);
@@ -68,7 +68,7 @@ function createRandomBlocks(start, end, grid, widthOfGrid, heightOfGrid, numOfBl
 		if (!(block.wall)) {
 			block.wall = true;
 			blocksCounted += 1;
-
+			console.log('random');
 			const path = bfs(start, end, grid, widthOfGrid, heightOfGrid);
 			if (path.length === 0) {
 				block.wall = false;
@@ -76,7 +76,7 @@ function createRandomBlocks(start, end, grid, widthOfGrid, heightOfGrid, numOfBl
 			}
 			grid.forEach((x) => { x.visited = false; });
 		} else {
-			randomGrid = shuffelGrid(grid);
+			randomGrid = shuffleGrid(grid);
 			blocksCounted = 0;
 			grid.forEach((x) => { x.wall = false; });
 		}

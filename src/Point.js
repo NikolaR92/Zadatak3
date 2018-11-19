@@ -2,8 +2,8 @@
 class Point {
 	/**
 	 * Create a point
-	 * @param  {Integer} x - The x value
-	 * @param {Integer} y - The y value
+	 * @param  {number} x - The x value
+	 * @param {number} y - The y value
 	 */
 	constructor(x, y) {
 		this.x = x;
@@ -13,7 +13,7 @@ class Point {
 	}
 
 	/** Method for making a array from x and y
-	 * @return {Array.<Integer>} Array made of x and y
+	 * @return {Array.<number>} Array made of x and y
 	 */
 	toArray() {
 		return [this.x, this.y];
@@ -23,29 +23,29 @@ class Point {
 	 * @param x - x coordinate
 	 * @param	y - y coordinate
 	 * @param rows - number of rows that grid have
-	 * @param coloms - Number of coloms that grid have
-	 * @return {Integer} Index of a array based on coordinates
+	 * @param colons - Number of colons that grid have
+	 * @return {number} Index of a array based on coordinates
 	 */
-	index(x, y, rows, coloms) {
-		if (x < 0 || y < 0 || x > (coloms - 1) || y > (rows - 1)) {
+	static index(x, y, rows, colons) {
+		if (x < 0 || y < 0 || x > (colons - 1) || y > (rows - 1)) {
 			return -1;
 		}
-		return x + y * coloms;
+		return x + y * colons;
 	}
 
-	/** Methd for geting neighbors that are not visited of this Points
+	/** Method for getting neighbors that are not visited of this Points
 	 * @param {Array.<Point>} grid - Array of Point objects
-	 * @param {Integer} widthOfGrid - Number of colom that grid have
-	 * @param {Integer} heightOfGrid -Number of rows that grid have
-	 * @return {Array.<Poin>} Array of Point object that are neighbors and not visited
+	 * @param {number} widthOfGrid - Number of colons that grid have
+	 * @param {number} heightOfGrid -Number of rows that grid have
+	 * @return {Array.<Point>} Array of Point object that are neighbors and not visited
 	 */
 	getNeighbors(grid, widthOfGrid, heightOfGrid) {
 		const neighbors = [];
 
-		const top = grid[this.index(this.x, this.y - 1, heightOfGrid, widthOfGrid)];
-		const right = grid[this.index(this.x + 1, this.y, heightOfGrid, widthOfGrid)];
-		const bottom = grid[this.index(this.x, this.y + 1, heightOfGrid, widthOfGrid)];
-		const left = grid[this.index(this.x - 1, this.y, heightOfGrid, widthOfGrid)];
+		const top = grid[Point.index(this.x, this.y - 1, heightOfGrid, widthOfGrid)];
+		const right = grid[Point.index(this.x + 1, this.y, heightOfGrid, widthOfGrid)];
+		const bottom = grid[Point.index(this.x, this.y + 1, heightOfGrid, widthOfGrid)];
+		const left = grid[Point.index(this.x - 1, this.y, heightOfGrid, widthOfGrid)];
 
 		if (top && !(top.visited)) {
 			neighbors.push(top);
@@ -60,10 +60,7 @@ class Point {
 			neighbors.push(left);
 		}
 
-		if (neighbors.length > 0) {
-			return neighbors;
-		}
-		return undefined;
+		return neighbors;
 	}
 }
 
